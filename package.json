@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "gen-app-key": "node ./scripts/gen_app_key.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

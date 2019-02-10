@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const configs = $require('configs/app');
 
-const generateToken = (userId) => {
+const generateToken = userId => {
     const token = jwt.sign({
         sub: userId,
         iat: Date.now(),

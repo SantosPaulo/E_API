@@ -5,9 +5,9 @@ const bcryptjs = require('bcryptjs');
 const UserSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
-  createdAt: { type: Date, required: true, default: Date.now() },
-  updatedAt: { type: Date, required: false },
-  deletedAt: { type: Date, required: false }
+  created_at: { type: Date, required: true, default: Date.now() },
+  updated_at: { type: Date, required: false },
+  deleted_at: { type: Date, required: false }
 }, { versionKey: false });
 
 UserSchema.pre('save', async function (next) {

@@ -7,6 +7,7 @@ const jwtStrategy = new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: hashKey
 }, async (payload, done) => {
+
     try {
 
         const user = await User.findById(payload.sub);

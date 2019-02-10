@@ -10,7 +10,7 @@ const forwardToError = require('./http/middlewares/forwardToError');
 const { mongo } = require('./configs/app');
 
 const mongoose = require('mongoose');
-mongoose.connect(mongo.url);
+mongoose.connect(mongo.url, { useNewUrlParser: true });
 
 const indexRouter = require('./routes/index');
 const apiAuth = require('./routes/api/auth');
