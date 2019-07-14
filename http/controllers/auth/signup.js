@@ -3,7 +3,7 @@ const User = $require('models/user');
 
 const signUp = async (req, res) => {
 
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     const findUser = await User.findOne({ email });
 
@@ -11,7 +11,7 @@ const signUp = async (req, res) => {
         return res.send({ message: 'That email is already taken.' });
     }
     
-    const newUser = new User({ email, password });
+    const newUser = new User({ name, email, password });
     await newUser.save();
 
     const token = generateToken(newUser._id);

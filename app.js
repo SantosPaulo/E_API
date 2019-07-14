@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const errorHandler = require('./http/middlewares/errorHandler');
 const forwardToError = require('./http/middlewares/forwardToError');
+const cors = require('cors');
 const { mongo } = require('./configs/app');
 
 const mongoose = require('mongoose');
@@ -27,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/api/v1', apiV1);
