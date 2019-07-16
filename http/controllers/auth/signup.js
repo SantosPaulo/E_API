@@ -1,4 +1,4 @@
-const generateToken = require('./helpers/jwt');
+const { generateToken } = require('./helpers/jwt');
 const User = $require('models/user');
 
 const signUp = async (req, res) => {
@@ -14,9 +14,12 @@ const signUp = async (req, res) => {
     const newUser = new User({ name, email, password });
     await newUser.save();
 
-    const token = generateToken(newUser._id);
+    const jwt = generateToken(newUser._id);
 
-    return res.send({ token });
+    return res.send({
+        token: jwt.token,
+        expires_in: jwt.expiresIn
+    });
 };
 
 module.exports = signUp;
