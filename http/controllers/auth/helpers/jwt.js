@@ -1,25 +1,42 @@
 const jwt = require('jsonwebtoken');
 const configs = $require('configs/app');
+const moment = require('moment');
 
-const generateToken = userId => {
+const tokenGenerator = (userId, expiresIn) => {
 
-    const expiresIn = Math.floor(Date.now() / 1000) + (60 * 60);
-
-    const token = jwt.sign({
+    return jwt.sign({
         sub: userId,
         iat: Date.now(),
         exp: expiresIn
-        // exp: Math.floor(Date.now() / 1000) + (60 * 60)
     }, configs.app.hashKey);
+}
+
+const generateToken = userId => {
+
+    const expiresIn = moment().add(1, 'hour').valueOf();
+    const token = tokenGenerator(userId, expiresIn);
     
     return { token, expiresIn };
 };
 
 const generateRenewalToken = userId => {
+    
+    const renewalExpiresIn = moment().add(1, 'month').valueOf();
+    const renewalToken = tokenGenerator(userId, renewalExpiresIn);
+    
+    return { renewalToken, renewalExpiresIn };
+}
 
+const generateTokens = (userId) => {
+
+    const token = generateToken(userId);
+    const renewalToken = generateRenewalToken(userId);
+
+    return { token, renewalToken };
 }
 
 module.exports = {
     generateToken,
-    generateRenewalToken
+    generateRenewalToken,
+    generateTokens
 };

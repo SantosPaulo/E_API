@@ -1,4 +1,4 @@
-const { generateToken } = require('./helpers/jwt');
+const { generateTokens } = require('./helpers/jwt');
 const User = $require('models/user');
 
 const signUp = async (req, res) => {
@@ -14,11 +14,13 @@ const signUp = async (req, res) => {
     const newUser = new User({ name, email, password });
     await newUser.save();
 
-    const jwt = generateToken(newUser._id);
+    const jwt = generateTokens(newUser._id);
 
     return res.send({
-        token: jwt.token,
-        expires_in: jwt.expiresIn
+        token: jwt.token.token,
+        expires_in: jwt.token.expiresIn,
+        renewal_token: jwt.renewalToken.token,
+        renewal_expires_in: jwt.renewalToken.expiresIn
     });
 };
 
