@@ -3,7 +3,6 @@ const configs = $require('configs/app');
 const moment = require('moment');
 
 const tokenGenerator = (userId, expiresIn) => {
-
     return jwt.sign({
         sub: userId,
         iat: Date.now(),

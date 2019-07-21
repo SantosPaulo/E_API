@@ -16,12 +16,7 @@ const signUp = async (req, res) => {
 
     const jwt = generateTokens(newUser._id);
 
-    return res.send({
-        token: jwt.token.token,
-        expires_in: jwt.token.expiresIn,
-        renewal_token: jwt.renewalToken.token,
-        renewal_expires_in: jwt.renewalToken.expiresIn
-    });
+    return res.send(jwt);
 };
 
 module.exports = signUp;
