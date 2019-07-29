@@ -12,7 +12,7 @@ const tokenGenerator = (userId, expiresIn) => {
 
 const generateToken = userId => {
 
-    const expiresIn = moment().add(1, 'hour').valueOf();
+    const expiresIn = moment().add(1, 'minute' /* 'hour' */).valueOf();
     const token = tokenGenerator(userId, expiresIn);
     
     return { token, expiresIn };

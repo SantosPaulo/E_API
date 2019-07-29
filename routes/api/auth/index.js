@@ -8,6 +8,7 @@ const passport = require('passport');
 const passportLocal = passport.authenticate('local', { session: false });
 const passportJwt = passport.authenticate('jwt', { session: false });
 const validateCredentials = validation(validations.sign);
+const checkToken = $require('http/middlewares/checkToken');
 
 router
     .post('/signin', validateCredentials, passportLocal, authControllers.signIn);
@@ -16,6 +17,9 @@ router
     .post('/signup', validateCredentials, authControllers.signUp);
 
 router
-    .get('/user', passportJwt, authControllers.user);
+    .post('/renew', authControllers.renew);
+
+router
+    .get('/user', checkToken, passportJwt, authControllers.user);
 
 module.exports = router;
