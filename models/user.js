@@ -6,6 +6,8 @@ const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  avatar: { type: String, required: false, default: null },
+  gravatar: { type: String, required: false, default: null },
   created_at: { type: Date, required: true, default: Date.now() },
   updated_at: { type: Date, required: false },
   deleted_at: { type: Date, required: false }
