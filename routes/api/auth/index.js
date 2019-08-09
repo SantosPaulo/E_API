@@ -23,4 +23,10 @@ router
 router
     .get('/user', checkToken, passportJwt, authControllers.user);
 
+
+router
+    .get('/download', checkToken, passportJwt, (req, res) => {
+        res.download('./test.txt');
+    })
+
 module.exports = router;
